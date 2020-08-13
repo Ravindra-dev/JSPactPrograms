@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <form>
+            <input type="file" id="inputfile" accept="text/plain" />            
+        </form>
+
+
+        <script>
+            //Get the selected file using event handlers
+            document.getElementById('inputfile').addEventListener('change', fileOperation);
+
+            function fileOperation() { 
+
+                    var fr=new FileReader();
+                    // read the file
+                    fr.readAsText(this.files[0]);                   
+
+                    fr.onload=function(){ 
+                        var fData = fr.result;
+                        var data = fData.split(" ");
+                        var uniqWords = [];                        
+
+                        for(var i=0;i<data.length;i++){
+                            var word = data[i].trim().toLowerCase();
+                            // remove duplicates words
+                            if (uniqWords.includes(word)) {
+                                continue;
+                            }else{
+                                uniqWords.push(word);
+                            }                                        
+                        }
+                        console.log(uniqWords.sort());                                   
+                    }  
+                                    
+            }
+        </script> 
+    </body>
+</html>

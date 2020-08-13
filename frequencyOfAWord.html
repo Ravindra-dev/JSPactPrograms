@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <form>
+            <input type="file" id="inputfile" accept="text/plain" />            
+        </form>
+
+
+        <script>
+            //Get the selected file using event handlers
+            document.getElementById('inputfile').addEventListener('change', fileOperations);
+
+            function fileOperations() { 
+
+                    var fr=new FileReader();
+                    // read the file
+                    fr.readAsText(this.files[0]);                    
+
+                    fr.onload=function(){ 
+                        var fData = fr.result;
+                        var data = fData.split(" ");
+                        var freqWords = {};                        
+
+                        for(var i=0;i<data.length;i++){
+                            var word = data[i].trim().toLowerCase();
+                            // counting duplicates words
+                            if (word in freqWords) {
+                                freqWords[word] += 1;
+                            }else{
+                                freqWords[word] = 1;
+                            }                                        
+                        }
+                        console.log(freqWords);                                   
+                    }    
+             }
+        </script> 
+    </body>
+</html>
